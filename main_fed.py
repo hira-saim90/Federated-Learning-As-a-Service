@@ -16,9 +16,9 @@ from models.Nets import MLP, CNNMnist, CNNCifar
 from models.Fed import FedAvg
 from models.test import test_img
 import time
-from hira_kpca import KPCA
-from hira_cohort import Cohort
-from hira_msr import MSR
+from kpca import KPCA
+from cohort import Cohort
+from msr import MSR
 
 if __name__ == '__main__':
     # parse args
