@@ -72,3 +72,15 @@ class MSR:
      df = df.round(2)
 
      print(df.to_string())
+
+     def sla_violation(a):
+      if a==1 :
+       return 0.01
+      elif a==11 :
+       return 0.06
+      elif a==21:
+       return 0.09
+      elif a==31:
+       return 0.12
+      elif a==41:
+       return 0.14

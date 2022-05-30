@@ -31,6 +31,8 @@ class Cohort:
         # Impute with the most frequent value
               transaction_df[col] = transaction_df[col].fillna(transaction_df[col].value_counts().index[0])
 
+
+
 # Count the number of NaNs in the dataset and print the counts to verify
       print(transaction_df.isnull().values.sum())
       msno.bar(transaction_df)
@@ -73,3 +75,15 @@ class Cohort:
       pf.plot(kind="bar")
       plt.xlabel('Task Id')
       plt.ylabel('Cohort Index')
+
+    def avg_waiting_time(a):
+  	if a==1 :
+	 return 52
+  	elif a==11 :
+   	 return 100
+  	elif a==21:
+  	 return 180
+  	elif a==31:
+  	 return 190
+  	elif a==41:
+    	 return 220

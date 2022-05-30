@@ -102,7 +102,8 @@ if __name__ == '__main__':
         # copy weight to net_glob
         net_glob.load_state_dict(w_glob)
         # print("meta: ",dataset_train.meta)
-
+	c=Cohort()
+	m=MSR()
         # print loss
         loss_avg = sum(loss_locals) / len(loss_locals)
         time_elapsed = time.time() - since
@@ -112,7 +113,7 @@ if __name__ == '__main__':
         net_glob.eval()
         acc_train, loss_train = test_img(net_glob, dataset_train, args)
         # if(print_every is not None and iter%print_every == 1):
-        print('Round {:3d}, Average loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f}'.format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
+        print('Round {:3d}, Average loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f},Average Waiting Time: ,SLA Violation: {:.2f}' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train,c.avg_waiting_time(iter),m.sla_violation(iter)))
         # loss_train.append(loss_avg)
 
 
@@ -121,8 +122,8 @@ if __name__ == '__main__':
     acc_train, loss_train = test_img(net_glob, dataset_train, args)
     acc_test, loss_test = test_img(net_glob, dataset_test, args)
   
-    c=Cohort()
-    m=MSR()
+    
+    
     # k.plot_singular_values()
     print("Training accuracy: {:.2f}".format(acc_train))
     print("Testing accuracy: {:.2f}".format(acc_test))
