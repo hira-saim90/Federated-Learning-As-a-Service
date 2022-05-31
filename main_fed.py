@@ -112,7 +112,7 @@ if __name__ == '__main__':
         memoryUse = py.memory_info()[0]
         net_glob.eval()
         acc_train, loss_train = test_img(net_glob, dataset_train, args)
-        # if(print_every is not None and iter%print_every == 1):
+        if(print_every is not None and iter%print_every == 1):
         print('Round {:3d}, Average loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f},Average Waiting Time: ,SLA Violation: {:.2f}' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train,c.avg_waiting_time(iter),m.sla_violation(iter)))
         # loss_train.append(loss_avg)
 
