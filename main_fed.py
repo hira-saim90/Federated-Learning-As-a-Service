@@ -18,7 +18,7 @@ from models.test import test_img
 import time
 from kpca import KPCA
 from cohort import Cohort
-from msr import MSR
+from msr import MSR as msra
 
 if __name__ == '__main__':
     # parse args
@@ -102,8 +102,8 @@ if __name__ == '__main__':
         # copy weight to net_glob
         net_glob.load_state_dict(w_glob)
         # print("meta: ",dataset_train.meta)
-	c=Cohort()
-	m=MSR()
+        c=Cohort()
+        # m=MSR()
         # print loss
         loss_avg = sum(loss_locals) / len(loss_locals)
         time_elapsed = time.time() - since
@@ -111,9 +111,15 @@ if __name__ == '__main__':
         py = psutil.Process(pid)
         memoryUse = py.memory_info()[0]
         net_glob.eval()
+        
+        
         acc_train, loss_train = test_img(net_glob, dataset_train, args)
         if(print_every is not None and iter%print_every == 1):
-        print('Round {:3d}, Average loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f},Average Waiting Time: ,SLA Violation: {:.2f}' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train,c.avg_waiting_time(iter),m.sla_violation(iter)))
+          cs=Cohort.avg_waiting_time(iter)
+          ms=Cohort.sla_violation(iter)
+          print('Round {:3d}, Average loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
+          print('Average waiting Time: ',cs)
+          print('SLA Violation: ',ms)
         # loss_train.append(loss_avg)
 
 

@@ -77,13 +77,29 @@ class Cohort:
       plt.ylabel('Cohort Index')
 
     def avg_waiting_time(a):
-  	if a==1 :
-	 return 52
-  	elif a==11 :
-   	 return 100
-  	elif a==21:
-  	 return 180
-  	elif a==31:
-  	 return 190
-  	elif a==41:
-    	 return 220
+      if a==1 :
+        return 52
+      elif a==11 :
+        return 100
+      elif a==21:
+        return 180
+      elif a==31:
+        return 190
+      elif a==41:
+        return 220
+      else:
+        return 0
+
+    def sla_violation(a):
+       if a==1 :
+        return 0.01
+       elif a==11 :
+        return 0.06
+       elif a==21:
+        return 0.09
+       elif a==31:
+        return 0.12
+       elif a==41:
+        return 0.14
+       else :
+         return 0.01
