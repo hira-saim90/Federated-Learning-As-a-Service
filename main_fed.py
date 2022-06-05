@@ -117,7 +117,7 @@ if __name__ == '__main__':
         if(print_every is not None and iter%print_every == 1):
           cs=Cohort.avg_waiting_time(iter)
           ms=Cohort.sla_violation(iter)
-          print('Round {:3d}, Average loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
+          print('Round {:3d}, Loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
           print('Average waiting Time: ',cs)
           print('SLA Violation: ',ms)
         # loss_train.append(loss_avg)
