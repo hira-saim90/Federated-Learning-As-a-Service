@@ -73,10 +73,12 @@ if __name__ == '__main__':
     best_loss = None
     val_acc_list, net_list = [], []
     print_every=10
+    round=0
 
     if args.all_clients: 
         print("Aggregation over all clients")
         w_locals = [w_glob for i in range(args.num_users)]
+    
     for iter in range(args.epochs):
         loss_locals = []
         since = time.time()
@@ -111,13 +113,14 @@ if __name__ == '__main__':
         py = psutil.Process(pid)
         memoryUse = py.memory_info()[0]
         net_glob.eval()
-        
-        
+        cs=Cohort.avg_waiting_time(iter)
+        ms=Cohort.sla_violation(iter)
         acc_train, loss_train = test_img(net_glob, dataset_train, args)
         if(print_every is not None and iter%print_every == 1):
-          print('Round {:3d}, Loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
+          round+=1
+          print('Round {:3d}, Loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(round, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
           
-        print('Epoch {:3d}, Loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(iter, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
+        print('Epoch {:3d}, Loss {:.3f} Training complete in {:.0f}m {:.0f}s memory {},  Training accuracy: {:.2f} ' .format(iter+1, loss_avg,time_elapsed // 60, time_elapsed % 60,memoryUse,acc_train))
         print('Average waiting Time: ',cs)
         print('SLA Violation: ',ms)
         # loss_train.append(loss_avg)
